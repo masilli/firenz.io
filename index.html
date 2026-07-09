@@ -4,277 +4,144 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- SEO Meta Tags -->
-  <title>Firenz.io | Premium Digital Design & Software Engineering Studio</title>
-  <meta name="description" content="Firenz.io is a high-end digital agency crafting bespoke web applications, premium branding, and cutting-edge software interfaces that command attention.">
-  <meta name="keywords" content="digital agency, software engineering, UI UX design, custom web development, premium branding, luxury interfaces">
+  <!-- SEO & Optimization Meta Tags -->
+  <title>Firenz.io | Typographic Systems Orchestration Engine</title>
+  <meta name="description" content="Firenz.io is an invite-only systems orchestration engine and high-performance compilation runtime built for modern edge networks.">
+  <meta name="keywords" content="systems programming, edge computing, canvas matrix, compiler, developer framework, low latency">
   <meta name="author" content="Firenz.io">
   
-  <!-- Open Graph / Social Media -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Firenz.io | Premium Digital Design & Software Engineering">
-  <meta property="og:description" content="We design and develop high-end web applications and bespoke software interfaces.">
-  <meta property="og:image" content="assets/aether_commerce.jpg">
+  <meta property="og:title" content="Firenz.io | Typographic Systems Orchestration Engine">
+  <meta property="og:description" content="An invite-only high-performance systems runtime for edge network structures.">
   <meta property="og:url" content="https://firenz.io">
   
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="index.css">
-  
-  <!-- Favicon (Fallback) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>f</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22 font-family=%22monospace%22 fill=%22%2300ffd2%22>&gt;</text></svg>">
 </head>
 <body>
 
-  <!-- Background Ambient Glows -->
-  <div class="glow-container" aria-hidden="true">
-    <div class="glow-orb glow-orb-1"></div>
-    <div class="glow-orb glow-orb-2"></div>
-    <div class="glow-orb glow-orb-3"></div>
+  <div class="grid-container">
+    
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <span class="mono">&gt;_ firenz.io</span>
+        <div class="logo-dot" aria-hidden="true"></div>
+      </div>
+      <div class="header-meta mono">
+        <span class="text-muted">BUILD_VER: 0.12.4-BETA</span>
+        <div class="header-status">
+          <div class="status-indicator" aria-hidden="true"></div>
+          <span class="text-cyan">STATUS: READY</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Row -->
+    <section class="grid-cell hero-text-cell border-r" id="sec-hero">
+      <div class="hero-tag mono">
+        <span class="tag-badge">SYSTEMS RUNTIME</span>
+        <span class="text-muted">// EARLY INVITATION ONLY</span>
+      </div>
+      <h1>Universal, reactive logic execution at the edge.</h1>
+      <p>A zero-dependency framework built to compile and coordinate state machines, client rendering matrices, and high-performance WebAssembly routines across globally distributed servers.</p>
+      
+      <form class="waitlist-form" id="waitlist-form" action="#" method="POST">
+        <label for="waitlist-email" class="mono text-dim" style="font-size: 0.8rem; margin-bottom: 0.2rem;">ENTER ACCESS CODE OR EMAIL TO REQUEST INVITE</label>
+        <div class="input-group">
+          <input type="email" id="waitlist-email" placeholder="user@domain.com" required autocomplete="email">
+          <button type="submit" class="btn-submit" id="btn-request">REQUEST ACCESS</button>
+        </div>
+        <div class="waitlist-status mono" id="waitlist-msg"></div>
+      </form>
+    </section>
+
+    <div class="grid-cell hero-visual-cell" aria-hidden="true">
+      <div id="canvas-container">
+        <canvas id="matrix-canvas"></canvas>
+      </div>
+    </div>
+
+    <!-- Terminal Row -->
+    <section class="grid-cell terminal-cell" id="sec-terminal">
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <span class="mono text-cyan">// SIMULATION & EXECUTION</span>
+        <h2 style="font-size: 2.2rem; font-weight: 500; letter-spacing: -0.02em; max-width: 450px;">Real-time node coordination and compilation telemetry.</h2>
+        <p class="text-dim" style="max-width: 480px;">Observe how the orchestration core initializes local modules, establishes secure mesh routes, and evaluates system parameters. The reactive loop responds to network shifts instantly.</p>
+        <div class="mono text-muted" style="margin-top: 1rem;">
+          SYSTEM: WASM_COMPILE // CPU_TARGET: ARM64/X86_64
+        </div>
+      </div>
+      
+      <div class="terminal-window" aria-label="Simulated Terminal Window">
+        <div class="terminal-header-bar mono">
+          <span class="text-dim">firenz_kernel --telemetry</span>
+          <span class="text-muted">PID: 90241</span>
+        </div>
+        <div class="terminal-body" id="terminal-output" role="log">
+          <!-- Terminal logs will be generated dynamically by main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture Grid Row 1 -->
+    <section class="grid-cell features-title-cell border-r" id="sec-features">
+      <span class="mono text-cyan">// SPECIFICATION</span>
+      <h2 style="font-size: 2rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 1rem; max-width: 250px;">Architected for predictability.</h2>
+      <p class="text-dim" style="margin-top: 1.5rem; font-size: 0.95rem;">Every component is engineered for static memory safety, compile-time schema validation, and zero performance overhead.</p>
+    </section>
+
+    <article class="grid-cell feature-cell border-r">
+      <div class="feature-number mono">01 / SAFETY</div>
+      <h3>Compile-Time Memory Allocation</h3>
+      <p>By enforcing strict boundary bounds and static layout mapping, the engine achieves zero heap allocations during core hot paths, preventing runtime out-of-memory states.</p>
+      <pre class="code-snippet"><code>fn allocate_mesh&lt;const N: usize&gt;() -> StaticMesh&lt;N&gt; {
+  StaticMesh::new_uninit()
+}</code></pre>
+    </article>
+
+    <article class="grid-cell feature-cell">
+      <div class="feature-number mono">02 / PROTOCOL</div>
+      <h3>Zero-Copy Virtual Mesh I/O</h3>
+      <p>Data frames are streamed directly into WebAssembly shared buffers, bypassing translation steps. Experience throughput restricted only by hardware limits.</p>
+      <pre class="code-snippet"><code>import { readFrame } from "firenz/mesh";
+const buffer = new SharedArrayBuffer(1024);
+readFrame(buffer);</code></pre>
+    </article>
+
+    <!-- Architecture Grid Row 2 -->
+    <div class="grid-cell border-r" style="grid-column: span 4;" aria-hidden="true"></div>
+
+    <article class="grid-cell feature-cell border-r">
+      <div class="feature-number mono">03 / CONCURRENCY</div>
+      <h3>Orchestration Engine</h3>
+      <p>A lock-free event queue distributes incoming events across logical cores, coordinating concurrent execution threads without context-switching bottlenecks.</p>
+    </article>
+
+    <article class="grid-cell feature-cell">
+      <div class="feature-number mono">04 / LATENCY</div>
+      <h3>Sub-Millisecond Sync</h3>
+      <p>Uses a proprietary consensus protocol optimised for geographic edge structures, updating shared key-value configurations across nodes instantly.</p>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-cell">
+        <div class="mono">
+          &copy; 2026 FIRENZ.IO. ALL RIGHTS RESERVED.
+        </div>
+        
+        <ul class="footer-meta mono">
+          <li><span class="text-muted">INQUIRIES:</span> <a href="mailto:hello@firenz.io" class="contact-inquiry" id="footer-contact">hello@firenz.io</a></li>
+          <li><span class="text-muted">LICENSE:</span> MIT-0</li>
+          <li><span class="text-muted">MEMBER:</span> W3C / CNCF</li>
+        </ul>
+      </div>
+    </footer>
+
   </div>
 
-  <!-- Header & Navigation -->
-  <header id="main-header">
-    <div class="container nav-wrapper">
-      <a href="#home" class="logo" id="nav-logo" aria-label="Firenz.io homepage">
-        Firenz<span>.io</span>
-      </a>
-      
-      <button class="nav-toggle" id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navigation-links">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      
-      <nav id="navigation-links" aria-label="Main Navigation">
-        <ul class="nav-links">
-          <li><a href="#home" class="active" id="link-home">Home</a></li>
-          <li><a href="#services" id="link-services">Services</a></li>
-          <li><a href="#work" id="link-work">Work</a></li>
-          <li><a href="#contact" id="link-contact">Contact</a></li>
-          <li><a href="#contact" class="btn btn-secondary" id="btn-header-talk" style="padding: 0.5rem 1.2rem; font-size: 0.85rem; margin-left: 1rem;">Let's Talk</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="container hero-grid">
-        <div class="hero-content reveal">
-          <span class="badge">Creative Studio</span>
-          <h1>We craft digital experiences <span>that command attention.</span></h1>
-          <p>We design and develop high-end, responsive websites and bespoke software interfaces that bridge the gap between fine art and functional engineering.</p>
-          <div class="hero-actions">
-            <a href="#work" class="btn btn-primary" id="hero-btn-work">
-              View Our Work
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-            <a href="#contact" class="btn btn-secondary" id="hero-btn-contact">Get In Touch</a>
-          </div>
-        </div>
-        
-        <div class="hero-visual reveal" style="transition-delay: 0.2s;" aria-hidden="true">
-          <div class="visual-sphere"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services / Features Section -->
-    <section id="services">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">What We Do</span>
-          <h2>Bespoke digital services tailored for modern brands.</h2>
-          <p>We combine premium artistic design with highly optimized, robust software engineering to deliver products that perform and inspire.</p>
-        </div>
-        
-        <div class="services-grid">
-          <!-- Service Card 1 -->
-          <article class="glass-card service-card reveal" id="service-design">
-            <div class="service-icon" aria-hidden="true">
-              <!-- Art Palette SVG -->
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19C5.35825 19.5083 5.4857 20.2589 5.25367 20.9025C5.10903 21.3037 5.29172 21.7397 5.68864 21.8953C6.01258 22.0223 6.37035 22 6.70275 22H12Z"></path><circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"></circle><circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"></circle><circle cx="16.5" cy="9.5" r="1.5" fill="currentColor"></circle><circle cx="15.5" cy="14.5" r="1.5" fill="currentColor"></circle></svg>
-            </div>
-            <h3>Creative UI/UX Design</h3>
-            <p>Stunning, interactive user interfaces that set you apart. We focus on modern layouts, micro-interactions, color theory, and flawless accessibility.</p>
-          </article>
-          
-          <!-- Service Card 2 -->
-          <article class="glass-card service-card reveal" style="transition-delay: 0.15s;" id="service-web">
-            <div class="service-icon" aria-hidden="true">
-              <!-- Code SVG -->
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-            </div>
-            <h3>High-Performance Web</h3>
-            <p>Lightning-fast frontend architectures optimized for Core Web Vitals. Zero bloat, responsive layout systems, and clean semantic structures.</p>
-          </article>
-          
-          <!-- Service Card 3 -->
-          <article class="glass-card service-card reveal" style="transition-delay: 0.3s;" id="service-eng">
-            <div class="service-icon" aria-hidden="true">
-              <!-- Server/Database SVG -->
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
-            </div>
-            <h3>Bespoke Engineering</h3>
-            <p>Custom APIs, robust cloud architectures, and database integrations tailored to your product logic, ensuring security and seamless scaling.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats" aria-label="Company Statistics">
-      <div class="container stats-grid">
-        <div class="stat-item reveal">
-          <div class="stat-number" id="stat-projects">50+</div>
-          <div class="stat-label">Projects Completed</div>
-        </div>
-        <div class="stat-item reveal" style="transition-delay: 0.1s;">
-          <div class="stat-number" id="stat-design">100%</div>
-          <div class="stat-label">Custom Design</div>
-        </div>
-        <div class="stat-item reveal" style="transition-delay: 0.2s;">
-          <div class="stat-number" id="stat-speed">&lt;1.2s</div>
-          <div class="stat-label">LCP Load Speed</div>
-        </div>
-        <div class="stat-item reveal" style="transition-delay: 0.3s;">
-          <div class="stat-number" id="stat-satisfaction">99%</div>
-          <div class="stat-label">Client Satisfaction</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Works / Portfolio Section -->
-    <section id="work">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Featured Work</span>
-          <h2>Projects crafted with precision.</h2>
-          <p>Explore some of our recent collaborations, showcasing our commitment to high design standards and software quality.</p>
-        </div>
-        
-        <div class="works-grid">
-          <!-- Work Item 1 -->
-          <article class="work-card reveal" id="project-aether">
-            <img class="work-image" src="assets/aether_commerce.jpg" alt="Aether luxury fashion brand e-commerce landing page mock-up screenshot">
-            <div class="work-overlay">
-              <span class="work-category">E-Commerce / Design</span>
-              <h3>Aether Commerce</h3>
-              <p class="work-desc">Bespoke fashion storefront engineered for lightning fast response times and editorial art direction.</p>
-            </div>
-          </article>
-          
-          <!-- Work Item 2 -->
-          <article class="work-card reveal" style="transition-delay: 0.2s;" id="project-helios">
-            <img class="work-image" src="assets/helios_app.jpg" alt="Quantum Analytics solar energy charts dashboard mockup screenshot">
-            <div class="work-overlay">
-              <span class="work-category">Dashboard / SaaS</span>
-              <h3>Helios Analytics</h3>
-              <p class="work-desc">An interactive analytics dashboard interface built with micro-animations and low latency real-time data visualizers.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-      <div class="container contact-grid">
-        <div class="contact-info reveal">
-          <h3>Let's start your next digital chapter.</h3>
-          <p>Have an idea or project in mind? We'd love to help you build it. Reach out to start a conversation about design, tech, and everything in between.</p>
-          
-          <ul class="contact-info-list" aria-label="Contact Information">
-            <li class="contact-info-item">
-              <div class="contact-info-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              </div>
-              <div class="contact-info-content">
-                <h4>Email Us</h4>
-                <p><a href="mailto:hello@firenz.io" id="email-contact">hello@firenz.io</a></p>
-              </div>
-            </li>
-            
-            <li class="contact-info-item">
-              <div class="contact-info-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              </div>
-              <div class="contact-info-content">
-                <h4>Location</h4>
-                <p>Florence, Italy & Remote</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        
-        <div class="contact-form-wrapper glass-card reveal" style="transition-delay: 0.2s;">
-          <form class="contact-form" id="project-contact-form" action="#" method="POST">
-            <div class="form-group">
-              <label for="form-name">Your Name</label>
-              <input type="text" id="form-name" class="form-control" placeholder="Lorenzo de' Medici" required autocomplete="name">
-            </div>
-            
-            <div class="form-group">
-              <label for="form-email">Email Address</label>
-              <input type="email" id="form-email" class="form-control" placeholder="lorenzo@florence.it" required autocomplete="email">
-            </div>
-            
-            <div class="form-group">
-              <label for="form-message">Project Brief</label>
-              <textarea id="form-message" class="form-control" placeholder="Tell us about what you want to build..." required></textarea>
-            </div>
-            
-            <button type="submit" class="btn btn-primary" id="form-submit-btn">
-              Send Message
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-top">
-      <div class="footer-brand">
-        <a href="#home" class="logo" id="footer-logo">Firenz<span>.io</span></a>
-        <p>Crafting high-end web applications and bespoke software interfaces that bridge art and code.</p>
-        <ul class="social-links" aria-label="Social Media Links">
-          <li><a href="#" aria-label="Twitter X profile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a></li>
-          <li><a href="#" aria-label="GitHub organization profile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></li>
-          <li><a href="#" aria-label="Dribbble design portfolio"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.49-11.05 1-11.6 8.56"></path></svg></a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-links-group">
-        <h4>Navigation</h4>
-        <ul class="footer-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-links-group">
-        <h4>Contact</h4>
-        <ul class="footer-links">
-          <li>hello@firenz.io</li>
-          <li>Florence, Italy & Remote</li>
-          <li><a href="#contact">Book a consultation</a></li>
-        </ul>
-      </div>
-    </div>
-    
-    <div class="container footer-bottom">
-      <p>&copy; 2026 Firenz.io. All rights reserved.</p>
-      <p>Crafted in Florence with precision.</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
   <script src="main.js"></script>
 </body>
 </html>

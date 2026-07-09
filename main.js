@@ -1,148 +1,256 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Header scroll effect
-  const header = document.querySelector('header');
-  const checkScroll = () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  };
-  window.addEventListener('scroll', checkScroll);
-  checkScroll(); // Initial check
-
-  // 2. Mobile navigation toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  const navItems = document.querySelectorAll('.nav-links a');
-
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-      document.body.classList.toggle('overflow-hidden');
-    });
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        navToggle.classList.remove('open');
-        navLinks.classList.remove('open');
-        document.body.classList.remove('overflow-hidden');
-      });
-    });
-  }
-
-  // 3. Active nav link highlighter based on scroll position
-  const sections = document.querySelectorAll('section, .hero');
-  const navLinksList = document.querySelectorAll('.nav-links a');
-
-  const onScroll = () => {
-    let current = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      if (window.scrollY >= sectionTop - 150) {
-        current = section.getAttribute('id') || '';
-      }
-    });
-
-    navLinksList.forEach(link => {
-      link.classList.remove('active');
-      const href = link.getAttribute('href').substring(1);
-      if (href === current) {
-        link.classList.add('active');
-      }
-    });
-  };
-  window.addEventListener('scroll', onScroll);
-  onScroll();
-
-  // 4. Reveal elements on scroll (Intersection Observer)
-  const revealElements = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        // Unobserve once shown
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
-
-  revealElements.forEach(element => {
-    revealObserver.observe(element);
-  });
-
-  // 5. Interactive Glass Card Mouse Glow Effect & Parallax Sphere
-  const visualSphere = document.querySelector('.visual-sphere');
-  const heroVisual = document.querySelector('.hero-visual');
-
-  if (heroVisual && visualSphere) {
-    heroVisual.addEventListener('mousemove', (e) => {
-      const rect = heroVisual.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      
-      // Gentle parallax effect on the sphere
-      visualSphere.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px) scale(1.02)`;
-    });
-
-    heroVisual.addEventListener('mouseleave', () => {
-      visualSphere.style.transform = 'translate(0, 0) scale(1)';
-      visualSphere.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+  
+  // ==========================================
+  // 1. High-Performance Particle Canvas Grid
+  // ==========================================
+  const canvas = document.getElementById('matrix-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.clientWidth;
+    let height = canvas.clientHeight;
+    let dpi = window.devicePixelRatio || 1;
+    
+    // Set canvas dimensions with high-DPI scaling
+    const resizeCanvas = () => {
+      width = canvas.parentElement.clientWidth;
+      height = canvas.parentElement.clientHeight;
+      canvas.width = width * dpi;
+      canvas.height = height * dpi;
+      ctx.scale(dpi, dpi);
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Grid parameters
+    const spacing = 40; // spacing between dots in grid
+    let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000, active: false };
+    
+    // Track mouse coordinates over the visual cell container
+    const container = document.getElementById('canvas-container');
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      mouse.targetX = e.clientX - rect.left;
+      mouse.targetY = e.clientY - rect.top;
+      mouse.active = true;
     });
     
-    heroVisual.addEventListener('mouseenter', () => {
-      visualSphere.style.transition = 'none';
+    container.addEventListener('mouseleave', () => {
+      mouse.targetX = -1000;
+      mouse.targetY = -1000;
+      mouse.active = false;
     });
-  }
-
-  // 6. Dynamic Card Mouse Follower Glow (Interactive cards)
-  const glassCards = document.querySelectorAll('.glass-card, .work-card');
-  glassCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+    
+    // Smooth mouse position updates (lerping)
+    const lerpMouse = () => {
+      if (mouse.x === -1000) {
+        mouse.x = mouse.targetX;
+        mouse.y = mouse.targetY;
+      } else {
+        mouse.x += (mouse.targetX - mouse.x) * 0.15;
+        mouse.y += (mouse.targetY - mouse.y) * 0.15;
+      }
+    };
+    
+    // Draw loop
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+      lerpMouse();
       
-      // Update custom properties for glow coordinate tracking (can be used in CSS if desired)
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-    });
-  });
-
-  // 7. Contact Form Simulation
-  const contactForm = document.querySelector('.contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+      const cols = Math.floor(width / spacing) + 1;
+      const rows = Math.floor(height / spacing) + 1;
+      
+      const startX = (width - (cols - 1) * spacing) / 2;
+      const startY = (height - (rows - 1) * spacing) / 2;
+      
+      let nearestNode = null;
+      let minDistance = Infinity;
+      
+      // First pass: Calculate positions and find nearest node
+      for (let c = 0; c < cols; c++) {
+        for (let r = 0; r < rows; r++) {
+          const baseX = startX + c * spacing;
+          const baseY = startY + r * spacing;
+          
+          let dx = mouse.x - baseX;
+          let dy = mouse.y - baseY;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          
+          // Repulsion factor
+          const maxDist = 120;
+          let shiftX = 0;
+          let shiftY = 0;
+          let brightness = 0.1;
+          
+          if (dist < maxDist) {
+            const force = (maxDist - dist) / maxDist; // 0 to 1
+            // Pushing the node away from mouse
+            shiftX = -(dx / dist) * force * 15;
+            shiftY = -(dy / dist) * force * 15;
+            brightness = 0.1 + force * 0.8;
+          }
+          
+          const x = baseX + shiftX;
+          const y = baseY + shiftY;
+          
+          // Draw connecting gridlines to adjacent nodes with fade
+          if (dist < 150) {
+            ctx.strokeStyle = `rgba(0, 255, 210, ${ (150 - dist)/150 * 0.08 })`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+          
+          // Find nearest node for visual HUD telemetry
+          if (dist < minDistance && mouse.active) {
+            minDistance = dist;
+            nearestNode = { x, y, c, r, dist };
+          }
+          
+          // Draw standard engineering crosshair or dot
+          if (brightness > 0.3) {
+            ctx.fillStyle = `rgba(0, 255, 210, ${brightness})`;
+            // Draw a small '+' crosshair
+            ctx.fillRect(x - 3, y, 7, 1);
+            ctx.fillRect(x, y - 3, 1, 7);
+          } else {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.fillRect(x - 1, y - 1, 2, 2);
+          }
+        }
+      }
+      
+      // HUD telemetry detail overlay next to the mouse cursor
+      if (nearestNode && nearestNode.dist < 100) {
+        ctx.fillStyle = 'rgba(0, 255, 210, 0.7)';
+        ctx.font = '9px "JetBrains Mono", monospace';
+        
+        const text = `NODE_${nearestNode.c}_${nearestNode.r} [x: ${Math.round(nearestNode.x)}, y: ${Math.round(nearestNode.y)}]`;
+        ctx.fillText(text, nearestNode.x + 12, nearestNode.y + 4);
+        
+        ctx.strokeStyle = 'rgba(0, 255, 210, 0.2)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(nearestNode.x, nearestNode.y, 8, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      
+      requestAnimationFrame(draw);
+    };
+    
+    // Start canvas loop
+    requestAnimationFrame(draw);
+  }
+  
+  // ==========================================
+  // 2. Simulated Terminal Console Logger
+  // ==========================================
+  const terminal = document.getElementById('terminal-output');
+  if (terminal) {
+    const logs = [
+      { text: 'Loading compilation libraries...', type: 'sys' },
+      { text: 'Target architectures defined: wasm32, arm64, x86_64', type: 'sys' },
+      { text: 'Orchestrator boot triggered.', type: 'sys' },
+      { text: 'Checking connection mesh tunnels...', type: 'net' },
+      { text: 'Connected to node core: milan-edge-01 (latency: 1.8ms)', type: 'net' },
+      { text: 'Connected to node core: florence-edge-03 (latency: 0.4ms)', type: 'net' },
+      { text: 'Connected to node core: london-edge-12 (latency: 9.2ms)', type: 'net' },
+      { text: 'Hot module optimization enabled. Watch mode active.', type: 'sys' },
+      { text: 'Executing kernel benchmarks...', type: 'bench' },
+      { text: 'COLD BOOT COMPLETED IN 3.84ms // HEAP ALLOCATIONS: 0 bytes', type: 'bench' },
+      { text: 'Telemetry server listening on port 9024...', type: 'sys' },
+      { text: 'MESH SYNC: Updated key "routing_matrix" globally in 0.82ms', type: 'bench' },
+      { text: 'Incoming request routed to sub-cluster arm64: 200 OK', type: 'sys' },
+      { text: 'CPU load: 1.2% // Memory footprint: 12.4 MB', type: 'bench' }
+    ];
+    
+    let index = 0;
+    
+    const appendLogLine = (logText, type = 'sys') => {
+      const line = document.createElement('div');
+      line.className = 'terminal-line';
+      
+      const prompt = document.createElement('span');
+      prompt.className = 'terminal-prompt';
+      
+      // Different prompt prefixes based on log type
+      if (type === 'bench') {
+        prompt.textContent = '[PERF]';
+        prompt.style.color = '#a855f7'; // purple
+      } else if (type === 'net') {
+        prompt.textContent = '[MESH]';
+        prompt.style.color = '#3b82f6'; // blue
+      } else {
+        prompt.textContent = '[CORE]';
+      }
+      
+      const content = document.createElement('span');
+      content.textContent = logText;
+      
+      line.appendChild(prompt);
+      line.appendChild(content);
+      
+      terminal.appendChild(line);
+      terminal.scrollTop = terminal.scrollHeight;
+      
+      // Limit lines in console
+      if (terminal.childElementCount > 40) {
+        terminal.removeChild(terminal.firstElementChild);
+      }
+    };
+    
+    // Seed initial console output
+    for (let i = 0; i < 6; i++) {
+      appendLogLine(logs[index].text, logs[index].type);
+      index = (index + 1) % logs.length;
+    }
+    
+    // Cycle additional logs
+    setInterval(() => {
+      appendLogLine(logs[index].text, logs[index].type);
+      index = (index + 1) % logs.length;
+    }, 2800);
+  }
+  
+  // ==========================================
+  // 3. Waitlist Invitation Form Telemetry Feedback
+  // ==========================================
+  const form = document.getElementById('waitlist-form');
+  const msgContainer = document.getElementById('waitlist-msg');
+  const submitBtn = document.getElementById('btn-request');
+  const emailInput = document.getElementById('waitlist-email');
+  
+  if (form && msgContainer) {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      
+      const email = emailInput.value;
       submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Sending...';
+      emailInput.disabled = true;
       
-      // Simulate network request
-      setTimeout(() => {
-        submitBtn.innerHTML = '✓ Message Sent!';
-        submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-        submitBtn.style.color = '#ffffff';
-        submitBtn.style.borderColor = '#10b981';
-        
-        contactForm.reset();
-        
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-          submitBtn.style.background = '';
-          submitBtn.style.color = '';
-          submitBtn.style.borderColor = '';
-        }, 3000);
-      }, 1500);
+      let step = 0;
+      const feedbackSteps = [
+        `[WAIT] RESOLVING NODE SHELL FOR '${email}'...`,
+        '[WAIT] VALIDATING ACCESS TOKEN SCHEMA...',
+        '[OK] CRYPTOGRAPHIC SIGNATURE GENERATED.',
+        `[DONE] INVITE REQUEST REGISTERED FOR RING_0: ${email}`
+      ];
+      
+      msgContainer.style.color = 'var(--text-dim)';
+      msgContainer.textContent = feedbackSteps[step];
+      
+      const interval = setInterval(() => {
+        step++;
+        if (step < feedbackSteps.length) {
+          msgContainer.textContent = feedbackSteps[step];
+          if (step === feedbackSteps.length - 1) {
+            msgContainer.style.color = 'var(--accent-cyan)';
+          }
+        } else {
+          clearInterval(interval);
+        }
+      }, 900);
     });
   }
 });
