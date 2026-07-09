@@ -226,6 +226,9 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       
       const email = emailInput.value;
+      // Capture the form data before disabling the inputs (disabled fields are ignored by FormData)
+      const formData = new FormData(form);
+      
       submitBtn.disabled = true;
       emailInput.disabled = true;
       
@@ -249,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 700);
 
       // Perform Netlify Form submission via AJAX
-      const formData = new FormData(form);
       
       fetch('/', {
         method: 'POST',
