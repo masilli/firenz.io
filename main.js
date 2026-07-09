@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // ==========================================
-  // 3. Waitlist Invitation Form Telemetry Feedback
+  // 3. Waitlist Invitation Form Telemetry Feedback (Netlify Forms Integration)
   // ==========================================
   const form = document.getElementById('waitlist-form');
   const msgContainer = document.getElementById('waitlist-msg');
@@ -232,9 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let step = 0;
       const feedbackSteps = [
         `[WAIT] RESOLVING NODE SHELL FOR '${email}'...`,
-        '[WAIT] VALIDATING ACCESS TOKEN SCHEMA...',
-        '[OK] CRYPTOGRAPHIC SIGNATURE GENERATED.',
-        `[DONE] INVITE REQUEST REGISTERED FOR RING_0: ${email}`
+        '[WAIT] PACKAGING ENCRYPTED WAITLIST SCHEMAS...',
+        '[WAIT] DISPATCHING PAYLOAD TO NETLIFY EDGE MESH...'
       ];
       
       msgContainer.style.color = 'var(--text-dim)';
@@ -244,13 +243,35 @@ document.addEventListener('DOMContentLoaded', () => {
         step++;
         if (step < feedbackSteps.length) {
           msgContainer.textContent = feedbackSteps[step];
-          if (step === feedbackSteps.length - 1) {
-            msgContainer.style.color = 'var(--accent-cyan)';
-          }
         } else {
           clearInterval(interval);
         }
-      }, 900);
+      }, 700);
+
+      // Perform Netlify Form submission via AJAX
+      const formData = new FormData(form);
+      
+      fetch('/', {
+        method: 'POST',
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(response => {
+        clearInterval(interval);
+        if (response.ok) {
+          msgContainer.style.color = 'var(--accent-cyan)';
+          msgContainer.textContent = `[DONE] INVITE REQUEST REGISTERED FOR RING_0: ${email}`;
+        } else {
+          throw new Error('ERR_NETLIFY_GATEWAY_REJECTED');
+        }
+      })
+      .catch(error => {
+        clearInterval(interval);
+        msgContainer.style.color = '#ef4444'; // Terminal red for errors
+        msgContainer.textContent = `[FAIL] TRANSMISSION ERROR: ${error.message || 'DISCONNECTED'}`;
+        submitBtn.disabled = false;
+        emailInput.disabled = false;
+      });
     });
   }
 });

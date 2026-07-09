@@ -47,10 +47,11 @@
       <h1>Universal, reactive logic execution at the edge.</h1>
       <p>A zero-dependency framework built to compile and coordinate state machines, client rendering matrices, and high-performance WebAssembly routines across globally distributed servers.</p>
       
-      <form class="waitlist-form" id="waitlist-form" action="#" method="POST">
+      <form class="waitlist-form" id="waitlist-form" name="waitlist" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="waitlist">
         <label for="waitlist-email" class="mono text-dim" style="font-size: 0.8rem; margin-bottom: 0.2rem;">ENTER ACCESS CODE OR EMAIL TO REQUEST INVITE</label>
         <div class="input-group">
-          <input type="email" id="waitlist-email" placeholder="user@domain.com" required autocomplete="email">
+          <input type="email" id="waitlist-email" name="email" placeholder="user@domain.com" required autocomplete="email">
           <button type="submit" class="btn-submit" id="btn-request">REQUEST ACCESS</button>
         </div>
         <div class="waitlist-status mono" id="waitlist-msg"></div>
