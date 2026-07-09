@@ -381,8 +381,11 @@ header {
 }
 
 /* Footer & Waitlist Bottom */
-.footer-cell {
+footer {
   grid-column: span 12;
+}
+
+.footer-cell {
   display: flex;
   justify-content: space-between;
   align-items: center;
